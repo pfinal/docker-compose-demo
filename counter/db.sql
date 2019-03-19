@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS testdb;
 USE testdb;
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `username` varchar(50) UNIQUE NOT NULL,
   `password` varchar(50) NOT NULL DEFAULT '',
@@ -12,3 +12,4 @@ INSERT INTO `user` (`username`, `password`)
 VALUES
     ('ethan', md5('111111')),
     ('joe',   md5('111111'));
+
