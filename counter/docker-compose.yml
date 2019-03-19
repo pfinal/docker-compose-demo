@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:5.5
     volumes:
-      - $PWD/mysql:/var/lib/mysql
+      - $PWD/mysql-data:/var/lib/mysql
 
     environment:
       MYSQL_DATABASE: testdb
@@ -15,7 +15,7 @@ services:
   redis:
     image: redis:4.0-alpine
     volumes:
-      - $PWD/redis:/data
+      - $PWD/redis-data:/data
 
   myapp:
     build: api

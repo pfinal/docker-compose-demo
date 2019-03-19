@@ -7,5 +7,5 @@ Thumbs.db
 __pycache__
 venv
 
-mysql
-redis
+mysql-data/
+redis-data/
