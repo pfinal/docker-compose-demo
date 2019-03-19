@@ -30,7 +30,7 @@ mysql:5.5 --default-time-zone=+8:00
 
 
 docker run -d --name api -p 8000:5000 --link redis --link mysql \
--e MYSQL_HOST=db \
+-e MYSQL_HOST=mysql \
 -e MYSQL_USER=root \
 -e MYSQL_PASSWORD=123456 \
 -e MYSQL_PORT=3306 \
