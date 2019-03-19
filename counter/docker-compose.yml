@@ -17,7 +17,7 @@ services:
     volumes:
       - $PWD/redis-data:/data
 
-  myapp:
+  api:
     build: api
     ports:
       - 8000:5000
