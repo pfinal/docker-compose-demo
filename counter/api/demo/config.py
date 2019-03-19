@@ -17,5 +17,3 @@ REDIS_HOST = os.getenv("REDIS_HOST") or '127.0.0.1'
 REDIS_PORT = os.getenv("REDIS_PORT") or '6379'
 
 DEBUG = True
-
-print(SQLALCHEMY_DATABASE_URI)
