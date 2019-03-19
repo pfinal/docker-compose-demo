@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+Thumbs.db
+.sass-cache
+.idea
+
+__pycache__
+venv
+
+mysql
+redis

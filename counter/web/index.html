@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>计数器</title>
+    <style type="text/css">
+        body{
+             text-align: center;
+         }
+        button{
+            font-size: 20px;
+            width: 80px;
+           
+        }
+        .result span{
+            display: inline-block;
+            font-size: 14px;
+            width: 80px;
+        }
+        .api{
+            color: #999;
+            font-size: 12px;
+        }
+
+        .logout{
+            position:absolute;
+            right:200px;
+            top:10px;
+        }
+
+    </style>
+</head>
+<body>
+<h2>计数器</h2>
+
+<a class="logout" href="javascript:;">退出</a>
+<div class="buttons">
+    <button>A</button>
+    <button>B</button>
+    <button>C</button>
+</div>
+<div class="result">
+    <span class="A"></span>
+    <span class="B"></span>
+    <span class="C"></span>
+</div>
+
+<br>
+<div>
+    <button class="reset">reset</button>
+</div>
+<br>
+<br>
+<div class="api">API地址 <input id="baseApi" size="30"></div>
+
+<script src="jquery.min.js"></script>
+<script>
+
+        var baseApi = window.localStorage.getItem('baseApi')
+        if(!baseApi){
+            baseApi = "http://localhost:8000/"
+        }
+
+        var token = window.localStorage.getItem('token')
+
+        $(function(){
+
+            $("#baseApi").val(baseApi)
+            $("#baseApi").change(function(){
+                baseApi = $(this).val()
+                window.localStorage.setItem('baseApi', baseApi)
+            })
+
+            $.getJSON(baseApi + "list", {token:token}, function(res){
+                if(!res.status){
+                    alert(res.data)
+                    window.location = "login.html"
+                    return
+                }
+                for(var i=0; i<res.data.length; i++){
+                   $(".result span").get(i).innerHTML = res.data[i]
+                }
+            })
+
+            $(".buttons button").click(function(){
+                var tag = $(this).html()
+                $.get(baseApi + "incr", {tag: tag, token:token}, function(res){
+
+                    if(!res.status){
+                        alert(res.data)
+                        window.location = "login.html"
+                        return
+                    }
+
+                    $(".result").find("." + tag).html(res.data)
+                })
+            })
+
+            $(".reset").click(function(){
+
+                if(!confirm("确定重置所有计数值吗?")){
+                    return
+                }
+
+                $.get(baseApi + "reset", {token:token}, function(res){
+
+                    if(!res.status){
+                        alert(res.data)
+                        window.location = "login.html"
+                        return
+                    }
+
+                    $(".result span").html('0')
+                })
+            })
+
+            $(".logout").click(function(){
+                $.get(baseApi + "logout", {token:token}, function(res){
+
+                    if(res.status){
+                        window.location = "login.html"
+                        return
+                    }
+
+                    alert(res.data)
+
+                })
+            })
+        })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>计数器</title>
+    <style type="text/css">
+        body{
+             text-align: center;
+         }
+        button{
+            font-size: 20px;
+            width: 80px;
+           
+        }
+        .result span{
+            display: inline-block;
+            font-size: 14px;
+            width: 80px;
+        }
+        .api{
+            color: #999;
+            font-size: 12px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<h2>计数器</h2>
+
+<div>
+    帐号 <input id="username" type="text" autocomplete="off">
+</div>
+<div>
+    密码 <input id="password" type="password" autocomplete="off">
+</div>
+
+<br>
+<div>
+    <button class="login">登录</button>
+</div>
+<br>
+<br>
+<div class="api">API地址 <input id="baseApi" size="30"></div>
+
+<script src="jquery.min.js"></script>
+<script>
+
+        var baseApi = window.localStorage.getItem('baseApi')
+        if(!baseApi){
+            baseApi = "http://192.168.88.1:8000/"
+        }
+
+        $(function(){
+
+            $("#baseApi").val(baseApi)
+            $("#baseApi").change(function(){
+                baseApi = $(this).val()
+                window.localStorage.setItem('baseApi', baseApi)
+            })
+
+
+            $(".login").click(function(){
+                var data = {
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                }
+                $.post(baseApi + "token", data, function(res){
+
+                   if(res.status){
+                        window.localStorage.setItem("token", res.data.token)
+                        window.location = "index.html"
+                   }else{
+                        alert(res.data)
+                   }
+                },'json')
+            })
+        })
+
+
+
+</script>
+</body>
+</html>

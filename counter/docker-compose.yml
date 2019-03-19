@@ -1,0 +1,35 @@
+version: '3.4'
+services:
+
+  db:
+    image: mysql:5.5
+    volumes:
+      - $PWD/mysql:/var/lib/mysql
+
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_ROOT_PASSWORD: 123456
+
+  redis:
+    image: redis:4.0-alpine
+    volumes:
+      - $PWD/redis:/data
+
+  myapp:
+    build: api
+    ports:
+      - 8000:5000
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: testdb
+
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+  web:
+    build: web
+    ports:
+      - 8080:80
