@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify, g
 import redis
 
-from demo.models import db
+from app.models import db
 
 app = Flask(__name__)
 
-app.config.from_object('demo.config')
+app.config.from_object('app.config')
 db.init_app(app)
 
 
@@ -89,7 +89,7 @@ def token():
     import hashlib
     import uuid
     from flask import jsonify, request
-    from demo.models import User
+    from app.models import User
 
     username = request.values.get('username')
     password = request.values.get('password')
