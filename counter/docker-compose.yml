@@ -10,6 +10,8 @@ services:
       MYSQL_DATABASE: testdb
       MYSQL_ROOT_PASSWORD: 123456
 
+    command: --default-time-zone=+8:00
+
   redis:
     image: redis:4.0-alpine
     volumes:

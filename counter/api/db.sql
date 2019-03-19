@@ -9,8 +9,8 @@ CREATE TABLE `user` (
   KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `user` (`id`, `username`, `password`)
+INSERT INTO `user` (`username`, `password`)
 VALUES
-    (1, 'ethan', md5('111111')),
-    (2, 'jack',   md5('111111')),
-    (3, 'joe',  md5('111111'));
+    ('ethan', md5('111111')),
+    ('jack',   md5('111111')),
+    ('joe',  md5('111111'));
