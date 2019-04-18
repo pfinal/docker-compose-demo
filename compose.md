@@ -25,7 +25,7 @@ docker run -d --name redis -v $PWD/redis-data:/data redis:4.0-alpine
 
 docker run -d --name mysql -v $PWD/mysql-data:/var/lib/mysql \
 -e MYSQL_DATABASE=testdb \
--e MYSQL_ROOT_PASSWORD=123456 
+-e MYSQL_ROOT_PASSWORD=123456 \
 mysql:5.5 --default-time-zone=+8:00
 
 
@@ -40,7 +40,7 @@ docker run -d --name api -p 8000:5000 --link redis --link mysql \
 api
 
 
-docker run -d --name web -p 8080:80
+docker run -d --name web -p 8080:80 web
 ```
 
 查看日志
